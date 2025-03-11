@@ -1,0 +1,18 @@
+{
+  "name": "lokalise-translator",
+  "id": "1481083501577346167",
+  "api": "1.0.0",
+  "main": "code.js",
+  "capabilities": [],
+  "enableProposedApi": false,
+  "documentAccess": "dynamic-page",
+  "editorType": [
+    "figma"
+  ],
+  "ui": "ui.html",
+  "networkAccess": {
+    "allowedDomains": ["https://translate.googleapis.com/translate_a/single"],
+    "reasoning": "Something",
+    "devAllowedDomains": ["https://localhost:3000"]
+  }
+}

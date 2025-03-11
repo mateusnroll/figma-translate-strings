@@ -1,0 +1,26 @@
+<h2>Get translations from Wellhub's Lokalise</h2>
+<p>
+  Origin language: 
+  <input id="origin" type="text" value="en-us" disabled>
+</p>
+<p>
+  Translate to:
+  <input id="target" type="text">
+</p>
+
+<button id="create">Create</button>
+<button id="cancel">Cancel</button>
+
+
+<script>
+
+  document.getElementById('create').onclick = () => {
+    const targetLanguage = document.getElementById('target').value;
+    parent.postMessage({ pluginMessage: { type: 'translate-to', targetLanguage } }, '*')
+  }
+
+  document.getElementById('cancel').onclick = () => {
+    parent.postMessage({ pluginMessage: { type: 'cancel' } }, '*')
+  }
+
+</script>
