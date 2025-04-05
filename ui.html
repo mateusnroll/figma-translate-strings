@@ -3,24 +3,91 @@
   Origin language: 
   <input id="origin" type="text" value="en-us" disabled>
 </p>
+
 <p>
+  Select action:
+  <select id="actionSelect">
+    <option value="updateKeys">Update keys</option>
+    <option value="localize">Localize</option>
+  </select>
+</p>
+
+<div id="updateKeysContent">
+  <p>All keys will be updated to reflect the latest en_US copy from Lokalise</p>
+  <div>
+    <button id="updateKeys">Update keys</button>
+    <button id="cancelUpdate">Cancel</button>
+  </div>
+</div>
+
+<div id="localizeContent" style="display:none;">
+  <p>Select languages to localize:</p>
+  <div id="languageOptions">
+    <div class="column">
+      <div><input type="checkbox" id="en_GB" value="en_GB"><label for="en_GB">en_GB</label></div>
+      <div><input type="checkbox" id="en_IE" value="en_IE"><label for="en_IE">en_IE</label></div>
+      <div><input type="checkbox" id="es_ES" value="es_ES"><label for="es_ES">es_ES</label></div>
+      <div><input type="checkbox" id="es_AR" value="es_AR"><label for="es_AR">es_AR</label></div>
+      <div><input type="checkbox" id="es_CL" value="es_CL"><label for="es_CL">es_CL</label></div>
+      <div><input type="checkbox" id="es_MX" value="es_MX"><label for="es_MX">es_MX</label></div>
+    </div>
+    <div class="column">
+      <div><input type="checkbox" id="it" value="it"><label for="it">it</label></div>
+      <div><input type="checkbox" id="de" value="de"><label for="de">de</label></div>
+      <div><input type="checkbox" id="pt_BR" value="pt_BR"><label for="pt_BR">pt_BR</label></div>
+      <div><input type="checkbox" id="pt_PT" value="pt_PT"><label for="pt_PT">pt_PT</label></div>
+      <div><input type="checkbox" id="en_CA" value="en_CA"><label for="en_CA">en_CA</label></div>
+      <div><input type="checkbox" id="fr_CA" value="fr_CA"><label for="fr_CA">fr_CA</label></div>
+    </div>
+  </div>
+
+  <div>
+    <button id="localize">Localize</button>
+    <button id="cancelLocalize">Cancel</button>
+  </div>
+</div>
+
+
+<!-- <p>
   Translate to:
   <input id="target" type="text">
 </p>
 
 <button id="create">Create</button>
-<button id="cancel">Cancel</button>
+<button id="cancel">Cancel</button> -->
 
 
 <script>
 
-  document.getElementById('create').onclick = () => {
+  document.getElementById('actionSelect').addEventListener('change', function() {
+    const selectedAction = this.value;
+    
+    if (selectedAction === 'updateKeys') {
+      document.getElementById('updateKeysContent').style.display = 'block';
+      document.getElementById('localizeContent').style.display = 'none';
+    } else if (selectedAction === 'localize') {
+      document.getElementById('updateKeysContent').style.display = 'none';
+      document.getElementById('localizeContent').style.display = 'block';
+    }
+  });
+
+  document.getElementById('localizeContent').onclick = () => {
     const targetLanguage = document.getElementById('target').value;
     parent.postMessage({ pluginMessage: { type: 'translate-to', targetLanguage } }, '*')
   }
 
-  document.getElementById('cancel').onclick = () => {
+  document.getElementById('cancelLocalize').onclick = () => {
     parent.postMessage({ pluginMessage: { type: 'cancel' } }, '*')
   }
 
 </script>
+
+
+<style>
+  #languageOptions {
+    display: flex;
+  }
+  #languageOptions .column {
+    flex-grow: 1;
+  }
+</style>
