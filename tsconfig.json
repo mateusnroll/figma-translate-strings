@@ -4,8 +4,11 @@
     "lib": ["es6"],
     "strict": true,
     "typeRoots": [
-      "./node_modules/@types",
+      // "./node_modules/@types",
       "./node_modules/@figma"
-    ]
+    ],
+    "paths": {
+      "undici-types": [ "./node_modules/undici/types/index.d.ts" ]
+    }
   }
 }

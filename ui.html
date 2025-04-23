@@ -71,6 +71,10 @@
     }
   });
 
+  document.getElementById('updateKeys').onclick = () => {
+    parent.postMessage({ pluginMessage: { type: 'updateKeys' } }, '*')
+  }
+
   document.getElementById('localizeContent').onclick = () => {
     const targetLanguage = document.getElementById('target').value;
     parent.postMessage({ pluginMessage: { type: 'translate-to', targetLanguage } }, '*')

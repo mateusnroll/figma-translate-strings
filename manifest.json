@@ -11,7 +11,7 @@
   ],
   "ui": "ui.html",
   "networkAccess": {
-    "allowedDomains": ["https://translate.googleapis.com/translate_a/single"],
+    "allowedDomains": ["*"],
     "reasoning": "Something",
     "devAllowedDomains": ["https://localhost:3000"]
   }
