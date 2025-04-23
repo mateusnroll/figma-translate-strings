@@ -64,12 +64,12 @@ function getNodesToUpdate(artboads: FrameNode[]): TextNode[] {
 }
 
 async function updateAllNodes(nodes: TextNode[]) {
-	const keys: string[] = nodes.map(i => i.name)
-	const results = await getKeys(keys, 'en_US')
+	const keys: string[] = nodes.map(i => i.name);
+	const results = await getKeys(keys, 'en_US');
 
-	nodes.forEach(node => {
-		updateNode(node, results[node.name.substring(1)])
-	})
+	await Promise.all(
+		nodes.map(node => updateNode(node, results[node.name.substring(1)]))
+	)
 }
 
 async function updateNode(node: TextNode, value: string) {
@@ -77,17 +77,8 @@ async function updateNode(node: TextNode, value: string) {
 	await figma.loadFontAsync(fontName)
 
 	console.log(node)
-	node.characters = 'LOUCURA'
+	node.characters = value
 }
-
-// async function translateTextNode(node: TextNode, targetLanguage: string) {
-//   console.log('here')
-
-//   const fontName: FontName = node.fontName as FontName
-//   await figma.loadFontAsync(fontName)
-
-//   node.characters = await getGoogleTranslation(node.characters, targetLanguage)
-// }
 
 
 
