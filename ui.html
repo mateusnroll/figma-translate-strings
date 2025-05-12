@@ -75,9 +75,13 @@
     parent.postMessage({ pluginMessage: { type: 'updateKeys' } }, '*')
   }
 
-  document.getElementById('localizeContent').onclick = () => {
-    const targetLanguage = document.getElementById('target').value;
-    parent.postMessage({ pluginMessage: { type: 'translate-to', targetLanguage } }, '*')
+  document.getElementById('localize').onclick = () => {
+		const selectedCheckboxes = document.querySelectorAll('#languageOptions input[type="checkbox"]:checked');
+    const targetLanguages = Array.from(selectedCheckboxes)
+        .map(checkbox => checkbox.value)
+        .join(',');
+    // const targetLanguages = document.getElementById('target').value;
+    parent.postMessage({ pluginMessage: { type: 'translate-to', targetLanguages } }, '*')
   }
 
   document.getElementById('cancelLocalize').onclick = () => {
